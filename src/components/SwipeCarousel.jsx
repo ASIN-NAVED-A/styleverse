@@ -58,22 +58,15 @@ const SwipeCarousel = () => {
     <section
       style={{
         width: "100%",
+        minHeight: "500px",
         background: "#fff",
         display: "flex",
         justifyContent: "center",
-        padding: "40px 0"
+        alignItems: "center",
+        touchAction: "pan-y",
+        userSelect: "none"
       }}
-    >
-      <div
-        style={{
-          width: "320px",
-          height: "440px",
-          overflow: "hidden",
-          position: "relative",
-          touchAction: "pan-y",
-          userSelect: "none"
-        }}
-        onTouchStart={(e) => handleStart(e.touches[0].clientX)}
+      onTouchStart={(e) => handleStart(e.touches[0].clientX)}
         onTouchMove={(e) => handleMove(e.touches[0].clientX)}
         onTouchEnd={handleEnd}
         onMouseDown={(e) => handleStart(e.clientX)}
@@ -82,6 +75,16 @@ const SwipeCarousel = () => {
         }}
         onMouseUp={handleEnd}
         onMouseLeave={handleEnd}
+    >
+      <div
+        style={{
+          width: "320px",
+          height: "440px",
+          overflow: "hidden",
+          position: "relative",
+          pointerEvents: "none" 
+        }}
+        
       >
         <img
           src={featured[index].image}
