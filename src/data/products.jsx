@@ -7,7 +7,7 @@ const products = [
     description: "Elegant velvet evening gown with deep neckline.",
     price: 4999,
     rating: 4.8,
-    image: "/images/velvet-gown.jpg"
+    image: "/images/velvet-gown.png"
   },
   {
     id: 31,
@@ -16,7 +16,7 @@ const products = [
     description: "Sparkling sequin mini dress for night outs.",
     price: 3999,
     rating: 4.3,
-    image: "/images/sequin.jpg"
+    image: "/images/sequin.png"
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const products = [
     description: "Sparkling sequin mini dress for night outs.",
     price: 3999,
     rating: 4.3,
-    image: "/images/sequin-dress.jpg"
+    image: "/images/sequin-dress.png"
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const products = [
     description: "Flowy maxi dress with pastel floral prints.",
     price: 3499,
     rating: 4.6,
-    image: "/images/floral-maxi.jpg"
+    image: "/images/floral-maxi.png"
   },
   {
     id: 4,
@@ -43,7 +43,7 @@ const products = [
     description: "Minimalist satin slip dress with adjustable straps.",
     price: 2899,
     rating: 4.4,
-    image: "/images/satin-slip.jpg"
+    image: "/images/satin-slip.png"
   },
   {
     id: 5,
@@ -52,7 +52,7 @@ const products = [
     description: "Romantic midi dress with ruffled hem and sleeves.",
     price: 3199,
     rating: 4.5,
-    image: "/images/ruffled-midi.jpg"
+    image: "/images/ruffled-midi.png"
   },
 
   // 🔵 Pants

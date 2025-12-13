@@ -1,65 +1,101 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { Draggable } from "gsap/Draggable";
+import { useState, useRef } from "react";
 import products from "../data/products";
 
-gsap.registerPlugin(Draggable);
-
 const SwipeCarousel = () => {
-  const trackRef = useRef(null);
+  const featured = products.filter(
+    (p) => p.category === "Featured Dresses"
+  );
 
-  useEffect(() => {
-    const track = trackRef.current;
-    const slides = track.querySelectorAll(".carousel-item");
-    const totalSlides = slides.length;
+  const [index, setIndex] = useState(0);
+  const [offsetX, setOffsetX] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-    let slideWidth = track.offsetWidth;
+  const startX = useRef(0);
 
-    // Arrange slides horizontally
-    slides.forEach((slide, index) => {
-      slide.style.left = `${index * 100}%`;
-    });
+  const handleStart = (x) => {
+    if (isAnimating) return;
+    startX.current = x;
+  };
 
-    // Draggable logic for swipe
-    Draggable.create(track, {
-      type: "x",
-      bounds: {
-        minX: -(slideWidth * (totalSlides - 1)),
-        maxX: 0
-      },
-      inertia: true,
-      snap: (value) => {
-        return Math.round(value / slideWidth) * slideWidth;
-      }
-    });
+  const handleMove = (x) => {
+    if (isAnimating) return;
+    setOffsetX(x - startX.current);
+  };
 
-    // Update size on resize
-    const handleResize = () => {
-      slideWidth = track.offsetWidth;
-      slides.forEach((slide, index) => {
-        slide.style.left = `${index * 100}%`;
+  const handleEnd = () => {
+    if (isAnimating) return;
+
+    if (offsetX < -80 && index < featured.length - 1) {
+      // swipe left
+      animateSlide(-1);
+    } else if (offsetX > 80 && index > 0) {
+      // swipe right
+      animateSlide(1);
+    } else {
+      // snap back
+      setOffsetX(0);
+    }
+  };
+
+  const animateSlide = (direction) => {
+    setIsAnimating(true);
+    setOffsetX(direction * 300);
+
+    setTimeout(() => {
+      setIndex((prev) => prev - direction);
+      setOffsetX(-direction * 300);
+
+      requestAnimationFrame(() => {
+        setOffsetX(0);
+        setIsAnimating(false);
       });
-    };
-    window.addEventListener("resize", handleResize);
+    }, 250);
+  };
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const featured = products.filter(p => p.category === "Featured Dresses");
+  if (!featured.length) return null;
 
   return (
-    <section className="swipe-carousel">
-      <h2>Featured Dresses</h2>
-
-      <div className="carousel-container">
-        <div className="carousel-track" ref={trackRef}>
-          {featured.map((product) => (
-            <div key={product.id} className="carousel-item">
-              <img src={product.image} alt={product.name} />
-              <h3>{product.name}</h3>
-            </div>
-          ))}
-        </div>
+    <section
+      style={{
+        width: "100%",
+        background: "#fff",
+        display: "flex",
+        justifyContent: "center",
+        padding: "40px 0"
+      }}
+    >
+      <div
+        style={{
+          width: "320px",
+          height: "440px",
+          overflow: "hidden",
+          position: "relative",
+          touchAction: "pan-y",
+          userSelect: "none"
+        }}
+        onTouchStart={(e) => handleStart(e.touches[0].clientX)}
+        onTouchMove={(e) => handleMove(e.touches[0].clientX)}
+        onTouchEnd={handleEnd}
+        onMouseDown={(e) => handleStart(e.clientX)}
+        onMouseMove={(e) => {
+          if (e.buttons === 1) handleMove(e.clientX);
+        }}
+        onMouseUp={handleEnd}
+        onMouseLeave={handleEnd}
+      >
+        <img
+          src={featured[index].image}
+          alt={featured[index].name}
+          draggable={false}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+            borderRadius: "12px",
+            transform: `translateX(${offsetX}px)`,
+            transition: isAnimating ? "transform 0.25s ease" : "none"
+          }}
+        />
       </div>
     </section>
   );

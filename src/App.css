@@ -33,38 +33,60 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
 .carousel-container {
   width: 100%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
   position: relative;
 }
 
 .carousel-track {
-  position: relative;
   display: flex;
-  touch-action: pan-y;
-  cursor: grab;
+  align-items: center;
+  position: relative;
 }
 
 .carousel-item {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  text-align: center;
+  width: 140px;          /* MUCH SMALLER width */
+  height: 180px;         /* MUCH SMALLER height */
+  margin: 0 12px;        /* small side gap */
+  flex-shrink: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.65);
+  transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+}
+
+/* MAIN CENTER CARD */
+.carousel-item.active {
+  opacity: 1;
+  transform: scale(1);   /* normal size */
+  filter: none;
+  pointer-events: auto;
+}
+
+/* PREVIOUS + NEXT CARDS (blurred + small) */
+.carousel-item.before,
+.carousel-item.after {
+  opacity: 0.8;
+  transform: scale(0.8);
+  filter: blur(1.5px);
+}
+
+/* HIDE ALL OTHER CARDS */
+.carousel-item:not(.active):not(.before):not(.after) {
+  opacity: 0;
+  transform: scale(0.5);
 }
 
 .carousel-item img {
   width: 100%;
-  height: 350px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 10px;
 }
+
 
 

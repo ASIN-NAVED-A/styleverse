@@ -15,12 +15,26 @@ import PriceTag from './components/PriceTag';
 import SizeGuideModal from './components/SizeGuideModal';
 
 function App() {
+
+  // ADD YOUR IMAGES HERE — use your correct paths
+  const carouselImages = [
+    "/images/dress1.jpg",
+    "/images/dress2.jpg",
+    "/images/dress3.jpg",
+    "/images/dress4.jpg",
+    "/images/dress5.jpg",
+    "/images/dress6.jpg",
+  ];
+
   return (
     <>
       <Header />
       <Navbar />
       <SearchBar />
-      <SwipeCarousel />
+
+      {/* UPDATED: Pass images to SwipeCarousel */}
+      <SwipeCarousel images={carouselImages} />
+
       <FilterBar />
 
       {/* Product categories with category-based styling */}
