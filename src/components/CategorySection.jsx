@@ -71,4 +71,4 @@ const CategorySection = ({ category, featured }) => {
   );
 };
 
-export default CategorySection;
+export default CategorySection; 

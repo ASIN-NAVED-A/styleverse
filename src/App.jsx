@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import SearchBar from './components/SearchBar';
@@ -16,7 +18,16 @@ import SizeGuideModal from './components/SizeGuideModal';
 
 function App() {
 
-  // ADD YOUR IMAGES HERE — use your correct paths
+  const homeRef = useRef(null);
+  const featuredRef = useRef(null);
+  const pantsRef = useRef(null);
+  const shirtsRef = useRef(null);
+  const shoesRef = useRef(null);
+  const accessoriesRef = useRef(null);
+  const watchesRef = useRef(null);
+  const lookbookRef = useRef(null);
+
+
   const carouselImages = [
     "/images/dress1.jpg",
     "/images/dress2.jpg",
@@ -29,23 +40,56 @@ function App() {
   return (
     <>
       <Header />
-      <Navbar />
+      <Navbar
+        homeRef={homeRef}
+        featuredRef={featuredRef}
+       
+       
+        pantsRef={pantsRef}
+        shirtsRef={shirtsRef}
+        shoesRef={shoesRef}
+        accessoriesRef={accessoriesRef}
+        watchesRef={watchesRef}
+        lookbookRef={lookbookRef}
+      />
+  
       <SearchBar />
 
-      {/* UPDATED: Pass images to SwipeCarousel */}
-      <SwipeCarousel images={carouselImages} />
+      <section ref={homeRef}>
+        <SwipeCarousel images={carouselImages} />
+      </section>
 
       <FilterBar />
 
-      {/* Product categories with category-based styling */}
-      <CategorySection category="Featured Dresses" className="featured-dresses" />
-      <CategorySection category="Pants" className="pants" />
-      <CategorySection category="Shirts" className="shirts" />
-      <CategorySection category="Shoes" className="shoes" />
-      <CategorySection category="Accessories" className="accessories" />
-      <CategorySection category="Watches" className="watches" />
+      <section ref={featuredRef}>
+        <CategorySection
+          category="Featured Dresses"
+          className="featured-dresses"
+        />
+      </section>
 
-      <LookbookGallery />
+      <section ref={pantsRef}>
+        <CategorySection category="Pants" className="pants" />
+      </section>
+
+      <section ref={shirtsRef}>
+        <CategorySection category="Shirts" className="shirts" />
+      </section>
+
+      <section ref={shoesRef}>
+        <CategorySection category="Shoes" className="shoes" />
+      </section>
+      <section ref={accessoriesRef}>
+      <CategorySection category="Accessories" className="accessories" />
+      </section>
+      <section ref={watchesRef}>
+      <CategorySection category="Watches" className="watches" />
+      </section>
+
+      <section ref={lookbookRef}>
+        <LookbookGallery />
+      </section>
+      
       <Footer />
     </>
   );

@@ -13,10 +13,38 @@ header {
 }
 
 .navbar {
-  background-color: #222;
-  color: white;
+  background-color: black;
+  color:  black;
   padding: 1rem;
 }
+.navbar * {
+  color: white;
+}
+.nav-menu li {
+  background: none;        /* remove any background */
+  box-shadow: none;        /* remove shadow if any */
+  border: none;            /* remove border if any */
+  padding: 0;              /* remove extra padding creating the square */
+  margin: 0;               /* remove default margin */
+  display: inline;         /* keep items inline */
+  color: white;            /* text white */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.nav-menu li:hover {
+  opacity: 0.7;            /* subtle hover effect */
+}
+.nav-menu {
+  list-style: none;
+  padding: 0;  /* remove default ul padding */
+  margin: 0;
+  display: flex;
+  gap: 36px;  /* spacing between items */
+}
+
+
 
 .search-bar {
   padding: 1rem;

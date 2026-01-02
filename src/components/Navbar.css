@@ -1,0 +1,42 @@
+.navbar {
+    position: sticky;   
+  top: 0;             
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  gap: 30px;                
+  padding: 18px 60px;
+  background-color: black;    
+  font-family: "Inter", sans-serif;
+}
+
+.navbar button {
+  background: none;           
+  border: none;               
+  padding: 0;                 
+  margin: 0;                 
+  color: white;              
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+.navbar button:hover {
+  opacity: 0.7;               /* subtle hover effect */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;          /* wrap buttons on small screens */
+    justify-content: center;
+    gap: 15px;
+    padding: 12px 24px;
+  }
+  .navbar button {
+    font-size: 12px;
+  }
+}
